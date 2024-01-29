@@ -84,9 +84,14 @@
 
 <script>
     function generateQRCode() {
+
+        var formulario = document.getElementById('generateQRCodeForm');
+        var valorCampo1 = formulario.querySelector('x-api-key').value;
+        
         var form = document.getElementById('generateQRCodeForm');
         var formData = new FormData(form);
         console.log(formData);
+        formData.append('x-api-key', valorCampo1);
 
         fetch('/generate_qrcode', {
             method: 'POST',
