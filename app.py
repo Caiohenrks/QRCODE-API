@@ -24,6 +24,7 @@ def index():
 def register():
     data = request.get_json()
     username = data.get('username')
+    password = data.get('password')  
 
     if User.query.filter_by(username=username).first():
         return jsonify({"message": "Username already taken!"}), 400
@@ -65,9 +66,7 @@ def generate_qrcode():
     img.save(img_buffer, format="PNG")
     img_buffer.seek(0)
 
-    qrcode_data = base64.b64encode(img_buffer.read()).decode('utf-8')
-
-    return jsonify({"qrcode_data": qrcode_data, "message": "QR Code generated successfully"})
+    return send_file(img_buffer, mimetype='image/png', as_attachment=True, download_name='qrcode.png')
 
 @app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
@@ -76,6 +75,7 @@ def dashboard():
 
     if request.method == 'POST':
         username = request.form.get('username')
+        password = request.form.get('password') 
         if User.query.filter_by(username=username).first():
             message = "Nome de usuário já existe!"
         else:
