@@ -81,22 +81,30 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
     function generateQRCode() {
-        var form = document.getElementById('generateQRCodeForm');
-        var formData = new FormData(form);
+        var apiKey = document.getElementById('api_key').value;
+        var content = document.getElementById('content').value;
 
-        fetch('/generate_qrcode', {
-            method: 'POST',
+        // Construir a URL da API (ajuste conforme necessário)
+        var apiUrl = '/generate_qrcode';
+
+        // Construir o corpo da solicitação
+        var requestBody = JSON.stringify({ content: content });
+
+        // Fazer a chamada à API usando jQuery AJAX
+        $.ajax({
+            url: apiUrl,
+            type: 'POST',
             headers: {
-                'Accept': 'application/json',
+                'x-api-key': apiKey,
+                'Content-Type': 'application/json'
             },
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            alert(data.message);  // Exemplo: exibir a mensagem em um alert
-        })
-        .catch(error => {
-            console.error('Erro ao gerar QR Code:', error);
+            data: requestBody,
+            success: function (data) {
+                alert(data.message);  // Exemplo: exibir a mensagem em um alert
+            },
+            error: function (error) {
+                console.error('Erro ao gerar QR Code:', error);
+            }
         });
     }
 </script>
