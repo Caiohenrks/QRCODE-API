@@ -9,7 +9,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-<body style="margin-top: 30px;">
+<body>
 
 <div class="container h-100">
     <div class="row h-100 justify-content-center align-items-center">
@@ -46,86 +46,11 @@
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Segunda Parte: Gerar QR Code -->
-    <div class="row h-100 justify-content-center align-items-center mt-4">
-        <div class="col-6">
-            <div class="card">
-                <div class="card-body">
-                    <h2 class="card-title text-center">Gerar QR Code</h2>
-    
-                    <form id="generateQRCodeForm">
-                        <div class="form-group">
-                            <label for="api_key">API Key:</label>
-                            <input type="text" id="api_key" name="x-api-key" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="content">Conteúdo:</label>
-                            <input type="text" id="content" name="content" class="form-control" required>
-                        </div>
-                        <div class="text-center">
-                            <button type="button" onclick="generateQRCode()" class="btn btn-primary">Gerar QR Code</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!-- Container para exibir o QR Code -->
-        <div id="qrcode-container" class="mt-4"></div>
-    </div>
-
-
-<!-- Incluindo o JS do Bootstrap e do jQuery -->
 <!-- Incluindo o JS do Bootstrap e do jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-<script>
-    function generateQRCode() {
-        var apiKey = document.getElementById('api_key').value;
-        var content = document.getElementById('content').value;
-    
-        // Construir a URL da API (ajuste conforme necessário)
-        var apiUrl = '/generate_qrcode';
-    
-        // Construir o corpo da solicitação
-        var requestBody = JSON.stringify({ content: content });
-    
-        // Fazer a chamada à API usando jQuery AJAX
-        $.ajax({
-            url: apiUrl,
-            type: 'POST',
-            headers: {
-                'x-api-key': apiKey,
-                'Content-Type': 'application/json'
-            },
-            data: requestBody,
-            success: function (data) {
-                // Exibir a mensagem da resposta
-                alert(data.message);
-    
-                // Verificar se data.qrcode_data está presente antes de criar a imagem
-                if (data.qrcode_data) {
-                    // Criar uma tag img e definir seu src como a representação base64 da imagem
-                    var img = document.createElement('img');
-                    img.src = 'data:image/png;base64,' + data.qrcode_data;
-    
-                    // Adicionar a tag img ao elemento desejado na sua página
-                    document.getElementById('qrcode-container').innerHTML = ''; // Limpar o conteúdo do container antes de adicionar a nova imagem
-                    document.getElementById('qrcode-container').appendChild(img);
-                } else {
-                    console.error('Dados de QR Code ausentes na resposta.');
-                }
-            },
-            error: function (error) {
-                console.error('Erro ao gerar QR Code:', error);
-            }
-        });
-    }
-
-
-</script>
-
 
 </body>
 
