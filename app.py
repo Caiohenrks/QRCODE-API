@@ -65,7 +65,9 @@ def generate_qrcode():
     img.save(img_buffer, format="PNG")
     img_buffer.seek(0)
 
-    return send_file(img_buffer, mimetype='image/png', as_attachment=True, download_name='qrcode.png')
+    qrcode_data = base64.b64encode(img_buffer.read()).decode('utf-8')
+
+    return jsonify({"qrcode_data": qrcode_data, "message": "QR Code generated successfully"})
 
 @app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
