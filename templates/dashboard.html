@@ -104,19 +104,25 @@
                 // Exibir a mensagem da resposta
                 alert(data.message);
     
-                // Criar uma tag img e definir seu src como a representação base64 da imagem
-                var img = document.createElement('img');
-                img.src = window.location.protocol + '//data:image/png;base64,' + data.qrcode_data;
+                // Verificar se data.qrcode_data está presente antes de criar a imagem
+                if (data.qrcode_data) {
+                    // Criar uma tag img e definir seu src como a representação base64 da imagem
+                    var img = document.createElement('img');
+                    img.src = 'data:image/png;base64,' + data.qrcode_data;
     
-                // Adicionar a tag img ao elemento desejado na sua página
-                document.getElementById('qrcode-container').innerHTML = ''; // Limpar o conteúdo do container antes de adicionar a nova imagem
-                document.getElementById('qrcode-container').appendChild(img);
+                    // Adicionar a tag img ao elemento desejado na sua página
+                    document.getElementById('qrcode-container').innerHTML = ''; // Limpar o conteúdo do container antes de adicionar a nova imagem
+                    document.getElementById('qrcode-container').appendChild(img);
+                } else {
+                    console.error('Dados de QR Code ausentes na resposta.');
+                }
             },
             error: function (error) {
                 console.error('Erro ao gerar QR Code:', error);
             }
         });
     }
+
 </script>
 
 
