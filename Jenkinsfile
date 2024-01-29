@@ -21,7 +21,7 @@ pipeline {
                 sh 'docker rm -f qrcodeapi || true'
                 sh 'docker rmi -f qrcodeapi || true'
                 sh 'docker build -t qrcodeapi .'
-                sh 'docker run -d -p 5000:5000 --name qrcodeapi qrcodeapi'
+                sh 'docker run -d -p 5000:5000 --name qrcodeapi --restart always qrcodeapi'
             }
         }
 
