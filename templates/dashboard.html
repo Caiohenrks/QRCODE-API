@@ -47,12 +47,59 @@
         </div>
     </div>
 
+    <!-- Segunda Parte: Gerar QR Code -->
+    <div class="row h-100 justify-content-center align-items-center mt-4">
+        <div class="col-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title text-center">Gerar QR Code</h2>
+    
+                    <form id="generateQRCodeForm">
+                        <div class="form-group">
+                            <label for="api_key">API Key:</label>
+                            <input type="text" id="api_key" name="x-api-key" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="content">Conteúdo:</label>
+                            <input type="text" id="content" name="content" class="form-control" required>
+                        </div>
+                        <div class="text-center">
+                            <button type="button" onclick="generateQRCode()" class="btn btn-primary">Gerar QR Code</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 <!-- Incluindo o JS do Bootstrap e do jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <!-- Incluindo o JS do Bootstrap e do jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    function generateQRCode() {
+        var form = document.getElementById('generateQRCodeForm');
+        var formData = new FormData(form);
+
+        fetch('/generate_qrcode', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+            },
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message);  // Exemplo: exibir a mensagem em um alert
+        })
+        .catch(error => {
+            console.error('Erro ao gerar QR Code:', error);
+        });
+    }
+</script>
 
 </body>
 
