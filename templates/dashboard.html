@@ -79,6 +79,10 @@
 <!-- Incluindo o JS do Bootstrap e do jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Incluindo o JS do Bootstrap e do jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 <script>
     function generateQRCode() {
         var apiKey = document.getElementById('api_key').value;
@@ -99,20 +103,16 @@
                 'Content-Type': 'application/json'
             },
             data: requestBody,
-            success: function (data, textStatus, xhr) {
-                // Verificar se a resposta indica um arquivo de download
-                var contentDisposition = xhr.getResponseHeader('Content-Disposition');
-                if (contentDisposition && contentDisposition.indexOf('attachment') !== -1) {
-                    // Iniciar o download
-                    var blob = new Blob([data], { type: 'image/png' });
-                    var link = document.createElement('a');
-                    link.href = window.URL.createObjectURL(blob);
-                    link.download = 'qrcode.png';
-                    link.click();
-                } else {
-                    // Exibir uma mensagem de sucesso ou outro tratamento
-                    alert(data.message);
-                }
+            success: function (data) {
+                // Exibir a mensagem da resposta
+                alert(data.message);
+
+                // Criar uma tag img e definir seu src como a representação base64 da imagem
+                var img = document.createElement('img');
+                img.src = 'data:image/png;base64,' + data.qrcode_data;
+
+                // Adicionar a tag img ao elemento desejado na sua página (por exemplo, um div com id="qrcode-container")
+                document.getElementById('qrcode-container').appendChild(img);
             },
             error: function (error) {
                 console.error('Erro ao gerar QR Code:', error);
