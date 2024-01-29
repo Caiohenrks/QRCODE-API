@@ -99,8 +99,20 @@
                 'Content-Type': 'application/json'
             },
             data: requestBody,
-            success: function (data) {
-                alert(data.message);  // Exemplo: exibir a mensagem em um alert
+            success: function (data, textStatus, xhr) {
+                // Verificar se a resposta indica um arquivo de download
+                var contentDisposition = xhr.getResponseHeader('Content-Disposition');
+                if (contentDisposition && contentDisposition.indexOf('attachment') !== -1) {
+                    // Iniciar o download
+                    var blob = new Blob([data], { type: 'image/png' });
+                    var link = document.createElement('a');
+                    link.href = window.URL.createObjectURL(blob);
+                    link.download = 'qrcode.png';
+                    link.click();
+                } else {
+                    // Exibir uma mensagem de sucesso ou outro tratamento
+                    alert(data.message);
+                }
             },
             error: function (error) {
                 console.error('Erro ao gerar QR Code:', error);
