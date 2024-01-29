@@ -53,11 +53,11 @@
             <div class="card">
                 <div class="card-body">
                     <h2 class="card-title text-center">Gerar QR Code</h2>
-
+    
                     <form action="/generate_qrcode" method="post">
                         <div class="form-group">
                             <label for="api_key">API Key:</label>
-                            <input type="text" id="api_key" name="api_key" class="form-control" required>
+                            <input type="text" id="api_key" name="x-api-key" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label for="content">Conteúdo:</label>
@@ -71,7 +71,7 @@
             </div>
         </div>
     </div>
-</div>
+
 
 <!-- Incluindo o JS do Bootstrap e do jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
