@@ -54,7 +54,7 @@
                 <div class="card-body">
                     <h2 class="card-title text-center">Gerar QR Code</h2>
     
-                    <form id="generateQRCodeForm">
+                    <form id="generateQRCodeForm" onSubmit="generateQRCode()">
                         <div class="form-group">
                             <label for="x-api-key">API Key:</label>
                             <input type="text" id="x-api-key" name="x-api-key" class="form-control" required>
@@ -64,7 +64,8 @@
                             <input type="text" id="content" name="content" class="form-control" required>
                         </div>
                         <div class="text-center">
-                            <button type="button" onclick="generateQRCode()" class="btn btn-primary">Gerar QR Code</button>
+                            <!-- <button type="button" onclick="generateQRCode()" class="btn btn-primary">Gerar QR Code</button> -->
+                            <input type="submit">
                         </div>
                     </form>
                 </div>
