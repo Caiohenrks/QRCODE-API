@@ -18,10 +18,10 @@ pipeline {
 
         stage('Docker build') {
             steps {
-                sh 'sudo docker rm -f qrcodeapi || true'
-                sh 'sudo docker rmi -f qrcodeapi || true'
-                sh 'sudo docker build -t qrcodeapi .'
-                sh 'sudo docker run -d -p 5000:5000 --name qrcodeapi --restart always qrcodeapi'
+                sh 'docker rm -f qrcodeapi || true'
+                sh 'docker rmi -f qrcodeapi || true'
+                sh 'docker build -t qrcodeapi .'
+                sh 'docker run -d -p 5000:5000 --name qrcodeapi --restart always qrcodeapi'
             }
         }
 
