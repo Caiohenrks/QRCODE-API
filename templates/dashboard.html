@@ -84,13 +84,13 @@
     function generateQRCode() {
         var apiKey = document.getElementById('api_key').value;
         var content = document.getElementById('content').value;
-
+    
         // Construir a URL da API (ajuste conforme necessário)
         var apiUrl = '/generate_qrcode';
-
+    
         // Construir o corpo da solicitação
         var requestBody = JSON.stringify({ content: content });
-
+    
         // Fazer a chamada à API usando jQuery AJAX
         $.ajax({
             url: apiUrl,
@@ -103,11 +103,11 @@
             success: function (data) {
                 // Exibir a mensagem da resposta
                 alert(data.message);
-
+    
                 // Criar uma tag img e definir seu src como a representação base64 da imagem
                 var img = document.createElement('img');
-                img.src = 'data:image/png;base64,' + data.qrcode_data;
-
+                img.src = window.location.protocol + '//data:image/png;base64,' + data.qrcode_data;
+    
                 // Adicionar a tag img ao elemento desejado na sua página
                 document.getElementById('qrcode-container').innerHTML = ''; // Limpar o conteúdo do container antes de adicionar a nova imagem
                 document.getElementById('qrcode-container').appendChild(img);
