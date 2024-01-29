@@ -48,6 +48,31 @@
     </div>
 </div>
 
+<!-- Segunda Parte: Gerar QR Code -->
+<div class="row h-100 justify-content-center align-items-center mt-4">
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title text-center">Gerar QR Code</h2>
+
+                <form action="/generate_qrcode" method="post">
+                    <div class="form-group">
+                        <label for="api_key">API Key:</label>
+                        <input type="text" id="api_key" name="api_key" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="content">Conteúdo:</label>
+                        <input type="text" id="content" name="content" class="form-control" required>
+                    </div>
+                    <div class="text-center">
+                        <input type="submit" value="Gerar QR Code" class="btn btn-primary">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Incluindo o JS do Bootstrap e do jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
