@@ -70,9 +70,12 @@
                 </div>
             </div>
         </div>
+        <!-- Container para exibir o QR Code -->
+        <div id="qrcode-container" class="mt-4"></div>
     </div>
 
 
+<!-- Incluindo o JS do Bootstrap e do jQuery -->
 <!-- Incluindo o JS do Bootstrap e do jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -105,7 +108,8 @@
                 var img = document.createElement('img');
                 img.src = 'data:image/png;base64,' + data.qrcode_data;
 
-                // Adicionar a tag img ao elemento desejado na sua página (por exemplo, um div com id="qrcode-container")
+                // Adicionar a tag img ao elemento desejado na sua página
+                document.getElementById('qrcode-container').innerHTML = ''; // Limpar o conteúdo do container antes de adicionar a nova imagem
                 document.getElementById('qrcode-container').appendChild(img);
             },
             error: function (error) {
@@ -114,6 +118,7 @@
         });
     }
 </script>
+
 
 </body>
 
