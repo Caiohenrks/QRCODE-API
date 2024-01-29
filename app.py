@@ -24,7 +24,6 @@ def index():
 def register():
     data = request.get_json()
     username = data.get('username')
-    password = data.get('password')  
 
     if User.query.filter_by(username=username).first():
         return jsonify({"message": "Username already taken!"}), 400
@@ -75,7 +74,6 @@ def dashboard():
 
     if request.method == 'POST':
         username = request.form.get('username')
-        password = request.form.get('password') 
         if User.query.filter_by(username=username).first():
             message = "Nome de usuário já existe!"
         else:
