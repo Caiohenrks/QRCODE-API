@@ -30,10 +30,10 @@ pipeline {
         stage('Push Nexus') {
         steps {
             script {
-                def nexusUrl = '192.168.15.80:8082'
+                def nexusUrl = 'localhost:8082'
                 def repoName = 'docker'
     
-                withCredentials([usernamePassword(credentialsId: 'NexusLogin', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+                withCredentials([usernamePassword(credentialsId: 'NEXUS_CREDENTIALS', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
                     sh "docker login -u $NEXUS_USERNAME -p $NEXUS_PASSWORD ${nexusUrl}"
                     sh "docker tag qrcodeapi ${nexusUrl}/${repoName}:latest"
                     sh "docker push ${nexusUrl}/${repoName}:latest"
