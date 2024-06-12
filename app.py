@@ -8,8 +8,8 @@ import io
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
-app.config['SECRET_KEY'] = secrets.token_hex(16)  # Adicionando uma chave secreta para CSRF
-csrf = CSRFProtect(app)  # Inicializando a proteção CSRF
+app.config['DevSecOps_e_vida'] = secrets.token_hex(16)  
+csrf = CSRFProtect(app)  
 db = SQLAlchemy(app)
 
 class User(db.Model):
