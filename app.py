@@ -1,9 +1,10 @@
-from flask import Flask, request, jsonify, send_file,render_template, redirect, url_for
+from flask import Flask, request, jsonify, send_file, render_template, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_swagger_ui import get_swaggerui_blueprint
 import secrets
 import qrcode
 import io
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 db = SQLAlchemy(app)
@@ -16,7 +17,7 @@ class User(db.Model):
     def __repr__(self):
         return f'<User {self.username}>'
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def index():
     return "API de Geração de QR Code"
 
