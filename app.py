@@ -68,25 +68,28 @@ def generate_qrcode():
 
     return send_file(img_buffer, mimetype='image/png', as_attachment=True, download_name='qrcode.png')
 
-@app.route('/dashboard', methods=['GET', 'POST'])
-def dashboard():
+@app.route('/dashboard', methods=['GET'])
+def dashboard_get():
+    return render_template('dashboard.html')
+
+@app.route('/dashboard', methods=['POST'])
+def dashboard_post():
     message = None
     api_key = None
-    status_code = 200
 
-    if request.method == 'POST':
-        username = request.form.get('username')
-        request.form.get('password') 
-        if User.query.filter_by(username=username).first():
-            message = "Nome de usuário já existe!"
-            status_code = 409
-        else:
-            api_key = secrets.token_hex(16)
-            new_user = User(username=username, api_key=api_key)
-            db.session.add(new_user)
-            db.session.commit()
-            message = "Usuário registrado com sucesso!"
-            status_code = 201
+    username = request.form.get('username')
+    request.form.get('password') 
+    if User.query.filter_by(username=username).first():
+        message = "Nome de usuário já existe!"
+        status_code = 409  # Conflict
+    else:
+        api_key = secrets.token_hex(16)
+        new_user = User(username=username, api_key=api_key)
+        db.session.add(new_user)
+        db.session.commit()
+        message = "Usuário registrado com sucesso!"
+        status_code = 201  # Created
+
     return render_template('dashboard.html', message=message, api_key=api_key), status_code
 
 
