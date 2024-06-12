@@ -5,7 +5,6 @@ import secrets
 import qrcode
 import io
 app = Flask(__name__)
-app.config['WTF_CSRF_ENABLED'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 db = SQLAlchemy(app)
 
