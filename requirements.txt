@@ -2,3 +2,4 @@ Flask
 Flask-SQLAlchemy 
 qrcode[pil] 
 flask-swagger-ui
+Flask-WTF
