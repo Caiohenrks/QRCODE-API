@@ -30,6 +30,8 @@
                     {% endif %}
 
                     <form action="/dashboard" method="post">
+                        <!-- Adicionando campo oculto para o token CSRF -->
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                         <div class="form-group">
                             <label for="username">Nome de Usuário:</label>
                             <input type="text" id="username" name="username" class="form-control" required>
