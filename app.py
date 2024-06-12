@@ -72,20 +72,23 @@ def generate_qrcode():
 def dashboard():
     message = None
     api_key = None
+    status_code = 200
 
     if request.method == 'POST':
         username = request.form.get('username')
         request.form.get('password') 
         if User.query.filter_by(username=username).first():
             message = "Nome de usuário já existe!"
+            status_code = 409
         else:
             api_key = secrets.token_hex(16)
             new_user = User(username=username, api_key=api_key)
             db.session.add(new_user)
             db.session.commit()
             message = "Usuário registrado com sucesso!"
+            status_code = 201
+    return render_template('dashboard.html', message=message, api_key=api_key), status_code
 
-    return render_template('dashboard.html', message=message, api_key=api_key)
 
 SWAGGER_URL = '/api/docs'
 API_URL = '/static/swagger.json'
